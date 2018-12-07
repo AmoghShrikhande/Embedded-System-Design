@@ -1,0 +1,35 @@
+DUNFIELD 8051 ASSEMBLER: AMOGHESD                                     PAGE: 1
+
+0000                         1  	 ORG 0H
+0000  75 20 00               2           MOV 20H,#00H   
+0003  75 21 00               3           MOV 21H,#00H   
+0006  75 22 00               4           MOV 22H,#00H   
+0009  75 23 00               5           MOV 23H,#00H   
+000C  75 30 00               6           MOV 30H,#00H   
+000F  F8                     7           MOV R0,A         
+0010  E5 F0                  8           MOV A,B       
+0012  C3                     9           CLR C           
+0013  33                    10           RLC A            
+0014  33                    11           RLC A
+0015  72 E0                 12           ORL C,ACC.0            
+0017  40 1D                 13           JC ERROR        
+0019  60 16                 14           JZ ZERO         
+001B  F5 20                 15           MOV 20H,A       
+001D  E8                    16           MOV A,R0
+001E  7A 00                 17           MOV R2,#00H
+0020  C3                    18           CLR C
+0021  95 20                 19  BACK:    SUBB A,20H     
+0023  40 04                 20           JC DOWN
+0025  FB                    21           MOV R3,A
+0026  0A                    22           INC R2
+0027  80 F8                 23           SJMP BACK
+0029  8A 21                 24  DOWN:    MOV 21H,R2      
+002B  8B 22                 25           MOV 22H,R3
+002D  8A 23                 26           MOV 23H,R2
+002F  80 FE                 27  END:     SJMP END    
+0031  75 30 01              28  ZERO:    MOV 30H,#01H
+0034  80 F9                 29           SJMP END
+0036  C2 E0                 30  ERROR:   CLR ACC.0
+0038  F5 23                 31           MOV 23H,A
+003A  75 30 02              32           MOV 30H,#02H
+003D  80 F0                 33           SJMP END
